@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*
 
 from unittest import TestCase
-from playroom import Playroom
+from antgame.playroom import Playroom
 
 
 class TestPlayroom(TestCase):

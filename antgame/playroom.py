@@ -1,9 +1,11 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*
+import time
 
-from ant import Ant
-from stick import Stick
-from game import Game
+from antgame.uidriver import UiDriver
+from antgame.ant import Ant
+from antgame.stick import Stick
+from antgame.game import Game
 
 
 class Playroom:
@@ -11,7 +13,7 @@ class Playroom:
     Playroom class. In charge of issuing all simulations.
     """
 
-    def __init__(self):
+    def __init__(self, driver: UiDriver):
         # Initial positions of every ant.
         self.init_positions = [30, 80, 110, 160, 250]
 
@@ -27,6 +29,9 @@ class Playroom:
         # An empty result list for every simulation (unit: sec)
         self.results = []
 
+        # Set UI driver.
+        self.driver = driver
+
     def run_simulations(self):
         """
         Run (2 ^ ant_count) times of simulations, print out time spent in every
@@ -35,6 +40,9 @@ class Playroom:
         :return: Nothing.
         """
         for case_num in range(2 ** self.ant_total):
+            # Update case number in UI.
+            self.driver.update_label_case_num(case_num + 1)
+
             # Create ants.
             ants = []
             for ant_num in range(self.ant_total):
@@ -57,10 +65,13 @@ class Playroom:
             print(f'Case [{case_num+1}] \t {result} s')
             self.results.append(result)
 
+            # Update min / max number in UI.
+            self.driver.update_label_max_num(max(self.results))
+            self.driver.update_label_min_num(min(self.results))
+
         # Final results.
-        print()
-        print(f'MAX time: \t {max(self.results)} s')
-        print(f'MIN time: \t {min(self.results)} s')
+        print(f'Final MAX time: \t {max(self.results)} s')
+        print(f'Final MIN time: \t {min(self.results)} s')
 
     def get_ant_direction(self, case_num: int, ant_num: int) -> str:
         """

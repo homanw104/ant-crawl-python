@@ -1,15 +1,13 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*
 
-from playroom import Playroom
-
-
-def greetings():
-    print('This is an ant simulator.')
-    print('Starting...\n')
+import sys
+from antgame import *
+from PyQt5.QtWidgets import QApplication
 
 
 if __name__ == '__main__':
-    greetings()
-    room = Playroom()
-    room.run_simulations()
+    app = QApplication(sys.argv)
+    ui = UiDriver()
+    ui.show()
+    sys.exit(app.exec_())

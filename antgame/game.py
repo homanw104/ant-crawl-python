@@ -3,8 +3,8 @@
 
 from typing import List
 
-from ant import Ant
-from stick import Stick
+from antgame.ant import Ant
+from antgame.stick import Stick
 
 
 class Game:

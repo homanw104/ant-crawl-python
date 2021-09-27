@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="img">
+    <file>ant.png</file>
+    <file>stick.png</file>
+  </qresource>
+</RCC>
