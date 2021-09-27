@@ -39,10 +39,11 @@ class Ant:
         endpoint.
         :return: Nothing.
         """
-        if self.direction == 'left':
-            self.position -= self.velocity
-        else:
-            self.position += self.velocity
+        if self.on_stick:
+            if self.direction == 'left':
+                self.position -= self.velocity
+            else:
+                self.position += self.velocity
 
         if self.position >= stick.length or self.position <= 0:
             self.on_stick = False

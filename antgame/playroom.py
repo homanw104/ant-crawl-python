@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*
+
 import time
 
 from antgame.uidriver import UiDriver
@@ -58,20 +59,16 @@ class Playroom:
             stick = Stick(length=self.stick_length)
 
             # Run this simulation.
+            self.driver.update_label_output(f'Case [{case_num + 1}] \t ' + str(list(map(lambda a: a.direction, ants))))
             game = Game(ants, stick)
-            result = game.run()
+            result = game.run(self.driver)
 
-            # Print and store the result.
-            print(f'Case [{case_num+1}] \t {result} s')
+            # Store result and update UI.
             self.results.append(result)
-
-            # Update min / max number in UI.
+            self.driver.update_label_output(f'Case [{case_num + 1}] \t {result} s')
             self.driver.update_label_max_num(max(self.results))
             self.driver.update_label_min_num(min(self.results))
-
-        # Final results.
-        print(f'Final MAX time: \t {max(self.results)} s')
-        print(f'Final MIN time: \t {min(self.results)} s')
+            time.sleep(0.3)     # Thus this function need to be run in a thread.
 
     def get_ant_direction(self, case_num: int, ant_num: int) -> str:
         """

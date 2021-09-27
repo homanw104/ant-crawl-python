@@ -1,8 +1,10 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*
 
+import time
 from typing import List
 
+from antgame.uidriver import UiDriver
 from antgame.ant import Ant
 from antgame.stick import Stick
 
@@ -17,17 +19,20 @@ class Game:
         self.stick = stick
         self.timer = 0
 
-    def run(self):
+    def run(self, driver: UiDriver):
         """
         Run the whole simulation from the current status of ants and stick.
         :return: time_tick passed during the simulation.
         """
         time_tick = 0
         while True:
-            # Update the position of ants in the next time_tick.
+            # Update the position of ants and time_tick.
             for ant in self.ants:
                 ant.crawl(self.stick)
             time_tick += 1
+            driver.update_label_time_num(time_tick)
+            print('Positions: ' + str(list(map(lambda a: a.position, self.ants))))
+            time.sleep(0.03)     # Thus this function need to be run in a thread.
 
             # Determine whether the game has over, if ture, return time_tick.
             game_over = True
