@@ -4,9 +4,9 @@
 import time
 from typing import List
 
-from antgame.uidriver import UiDriver
-from antgame.ant import Ant
-from antgame.stick import Stick
+from src.antgame.uidriver import UiDriver
+from src.antgame.ant import Ant
+from src.antgame.stick import Stick
 
 
 class Game:
@@ -42,7 +42,7 @@ class Game:
             if game_over:
                 return time_tick
 
-            # Determine whether ants has collided, if true, change their directions.
+            # Determine whether ants have collided, if true, change their directions.
             ant_count = 5
             for i in range(0, ant_count):
                 for j in range(i + 1, ant_count):

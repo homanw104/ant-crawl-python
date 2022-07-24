@@ -2,9 +2,8 @@
 # -*- coding: UTF-8 -*
 
 import threading
-from PyQt5.QtGui import QTextCursor
 from PyQt5.QtWidgets import QMainWindow
-from res.antcrawl_ui import Ui_AntGame
+from src.resources.antcrawl_ui import Ui_AntGame
 
 
 class UiDriver(QMainWindow, Ui_AntGame):
@@ -14,7 +13,7 @@ class UiDriver(QMainWindow, Ui_AntGame):
         self.setupUi(self)
 
         # Setup playroom and buttons' onclick events.
-        from antgame.playroom import Playroom
+        from src.antgame.playroom import Playroom
         self.room = Playroom(self)
         self.room_thread = threading.Thread(target=self.room.run_simulations)
         self.button_start.clicked.connect(self.button_start_clicked)
@@ -29,7 +28,8 @@ class UiDriver(QMainWindow, Ui_AntGame):
             self.label_max_num.setText('0 sec')
             self.label_case_num.setText('0')
             self.text_output.setPlainText('')
-            self.room_thread = threading.Thread(target=self.room.run_simulations)   # Start a new thread.
+            self.room_thread.join()     # Join the old thread and start a new one.
+            self.room_thread = threading.Thread(target=self.room.run_simulations)
 
     def update_label_min_num(self, n: int):
         self.label_min_num.setText(str(n) + ' sec')

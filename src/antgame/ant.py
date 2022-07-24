@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
-from antgame.stick import Stick
+from src.antgame.stick import Stick
 
 
 class Ant:

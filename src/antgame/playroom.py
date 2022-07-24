@@ -3,10 +3,10 @@
 
 import time
 
-from antgame.uidriver import UiDriver
-from antgame.ant import Ant
-from antgame.stick import Stick
-from antgame.game import Game
+from src.antgame.uidriver import UiDriver
+from src.antgame.ant import Ant
+from src.antgame.stick import Stick
+from src.antgame.game import Game
 
 
 class Playroom:
